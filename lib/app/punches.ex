@@ -38,6 +38,14 @@ defmodule Smena.Punches do
   def get_punch!(id), do: Repo.get!(Punch, id)
 
   @doc """
+  Gets latest punch.
+
+  """
+  def get_latest_punch() do
+    Repo.one(from x in Punch, order_by: [desc: x.id], limit: 1)
+  end
+
+  @doc """
   Creates a punch.
 
   ## Examples

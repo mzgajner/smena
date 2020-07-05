@@ -11,6 +11,8 @@ defmodule SmenaWeb.Router do
 
   scope "/api", SmenaWeb do
     pipe_through :api
+
+    resources "/punches", PunchController, only: [:index, :create]
   end
 
   # Enables LiveDashboard only for development
