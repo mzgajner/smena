@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  phoenix:
+    image: elixir:latest
+    environment:
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: smena
+      PGPORT: 5432
+      PGHOST: db
+      SECRET_KEY: ThisShouldBeSomethingSecret
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    working_dir: /app
+    volumes:
+      - .:/app/
+      - elixir-deps:/app/deps/
+      - elixir-build:/app/_build/
+    command: >
+      /bin/sh -c 'apt-get update && apt-get install -y inotify-tools'
+    entrypoint:
+      ./entrypoint.sh
+
+  db:
+    image: postgres:12
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data/pgdata
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  elixir-deps:
+  elixir-build:
