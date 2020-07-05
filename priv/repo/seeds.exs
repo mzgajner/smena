@@ -10,4 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-  Smena.Repo.insert!(%Smena.Users.User{name: "Mato"})
+mato = Smena.Repo.insert!(%Smena.Users.User{name: "Mato"})
+
+Smena.Repo.insert!(%Smena.Punches.Punch{user: mato, in: true})
+Smena.Repo.insert!(%Smena.Punches.Punch{user: mato, in: false})

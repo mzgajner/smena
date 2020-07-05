@@ -4,7 +4,7 @@ defmodule Smena.Punches.Punch do
 
   schema "punches" do
     field :in, :boolean, default: false
-    field :user_id, :id
+    belongs_to :user, Smena.Users.User
 
     timestamps()
   end
