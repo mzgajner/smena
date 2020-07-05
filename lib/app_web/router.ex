@@ -5,6 +5,10 @@ defmodule SmenaWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/", SmenaWeb do
+    get "/", IndexController, :self
+  end
+
   scope "/api", SmenaWeb do
     pipe_through :api
   end
